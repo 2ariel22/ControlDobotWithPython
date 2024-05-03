@@ -1,5 +1,5 @@
 import threading
-from Source.Modelo.dobot_api import DobotApiDashboard, DobotApi, DobotApiMove, MyType
+from dobot_api import DobotApiDashboard, DobotApi, DobotApiMove, MyType
 from time import sleep
 import numpy as np
 

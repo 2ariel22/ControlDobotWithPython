@@ -1,7 +1,7 @@
 import threading
 import cv2
 import numpy as np
-from Source.Modelo.dobot_api import DobotApiDashboard, DobotApi, DobotApiMove, MyType
+from dobot_api import DobotApiDashboard, DobotApi, DobotApiMove, MyType
 from time import sleep
 import keyboard
 import time
@@ -101,7 +101,10 @@ def detect_red_object():
                 print("Diferencia en y:", diff_y)
 
                 increase_x_y_coordinate(diff_x, diff_y)
-                ola()
+                #ola()
+                print()
+                print(point_Init)
+
 
 
                 
