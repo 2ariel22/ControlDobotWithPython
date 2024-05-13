@@ -3,6 +3,7 @@ from dobot_api import DobotApiDashboard, DobotApi, DobotApiMove, MyType
 from time import sleep
 import numpy as np
 
+
 # Variable global (coordenadas actuales)
 #https://github.com/Dobot-Arm/TCP-IP-4Axis-Python-CMD
 

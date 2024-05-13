@@ -7,6 +7,7 @@ import keyboard
 import time
 
 
+
 Width, Height = 550,700
 Enable=True
 color = "negro"
@@ -146,12 +147,12 @@ while True:
     a = int(input("""\n1.activar robot\n2.desactivar robot\n3.Eliminar Alarma
 4.Calibrar coordenadas\n5. posicion actual\n6.estado de entradas\n7. Moverpos1\n8.StateRobot
 9.Ircoordenadas\n=>"""))
-    
+
     if(a==1 or a==2):
         ActivarRobot(dashboard, feed)
+
     elif(a==3):
         EliminarAlarma(dashboard)
-
     elif(a==4):
         calibracion = True
     elif(a==5):
@@ -166,7 +167,6 @@ while True:
             print("calibracion iniciada")
             for pos in range(len(posicionActual)):
                 posis[pos] = float(posicionActual[pos])
-
             print(posis)
             time.sleep(1)
             calibracion= False
