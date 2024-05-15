@@ -10,7 +10,7 @@ def negro(max_contour):
     #print('Es negro')
 
 cap = cv2.VideoCapture(0)
-
+colorFinal = None
 while True:
     ret, frame = cap.read()
     if not ret:
@@ -65,7 +65,9 @@ while True:
         break
     elif key == ord('w'):
         if max_contour_type is not None:
-            print("Color detectado:", max_contour_type)
+            
+            if(max_contour_type == "negro"):
+                print("R:", max_contour_type)
 
 cap.release()
 cv2.destroyAllWindows()

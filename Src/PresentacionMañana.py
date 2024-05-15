@@ -5,17 +5,19 @@ from time import sleep
 import numpy as np
 import keyboard
 import time
+from ObjetColor import ColorDetector
 
 
-
+detector = ColorDetector()
 Width, Height = 550,700
 Enable=True
-color = "negro"
+color = None
 current_actual = None
 point_Init = [223.74, 0, 41.13, 0 ,0 ,0]
 
 posis = [239.591208, 0.161717, -166.945007, 49.317848, 0.000000, 0.000000]
 pointMemory = []
+
 
 calibracion = False
 
@@ -198,34 +200,40 @@ while True:
             posiAux = posis[0],posis[1],-44,posis[3],posis[4],posis[5]
             move.MovL(posis[0],posis[1],-44,posis[3],posis[4],posis[5])
             wait_arrive(posiAux)
-
-            move.MovL(posis[0],posis[1],posis[2],posis[3],posis[4],posis[5])
-            wait_arrive(posis)
-            dashboard.DO(1,1)
-            dashboard.DO(2,0)
-
-            move.RelMovL(offsetX=-30,offsetY=10,offsetZ=140)
-            posis[0] -= 30 
-            posis[1] += 10
-            posis[2] += 140
-            wait_arrive(posis)
             
-            if(color == "negro"):
-                move.RelMovL(offsetX=0,offsetY=-140,offsetZ=-50)
-                posis[0] -= 0 
-                posis[1] -= 140
-                posis[2] -=50 
-                wait_arrive(posis)
-                #move.RelMovL(offsetX=-30,offsetY=10,offsetZ=130)
-                #wait_arrive([(239.591208 - 30), (0.161717+10), (-166.945007+130), 49.317848, 0.000000, 0.000000])
-                color = "rojo"
-            else:
-                move.RelMovL(offsetX=0,offsetY=140,offsetZ=0)
-                posis[0] -= 0 
-                posis[1] += 140
-                posis[2] += 0
-                wait_arrive(posis)
-                color = "negro"
+            color = detector.get_color()
+            if color is not None:
+                    move.MovL(posis[0],posis[1],posis[2],posis[3],posis[4],posis[5])
+                    wait_arrive(posis)
+                    dashboard.DO(1,1)
+                    dashboard.DO(2,0)
+
+                    move.RelMovL(offsetX=-30,offsetY=10,offsetZ=140)
+                    posis[0] -= 30 
+                    posis[1] += 10
+                    posis[2] += 140
+                    wait_arrive(posis)
+                    
+            
+                    if(color == "negro"):
+                        move.RelMovL(offsetX=0,offsetY=-140,offsetZ=-50)
+                        posis[0] -= 0 
+                        posis[1] -= 140
+                        posis[2] -=50 
+                        wait_arrive(posis)
+                        #move.RelMovL(offsetX=-30,offsetY=10,offsetZ=130)
+                        #wait_arrive([(239.591208 - 30), (0.161717+10), (-166.945007+130), 49.317848, 0.000000, 0.000000])
+                        
+                    elif(color == "rojo"):
+                        move.RelMovL(offsetX=0,offsetY=140,offsetZ=0)
+                        posis[0] -= 0 
+                        posis[1] += 140
+                        posis[2] += 0
+                        wait_arrive(posis)
+                        color = "negro"
+                    else:
+                        print("desconcido")
+                        
             dashboard.DO(1,0)
             dashboard.DO(2,1)
             time.sleep(1)
